@@ -1,0 +1,87 @@
+build:
+  quality:
+    job:
+      dependency-analysis:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow quality: dependency-analysis"
+  correctness:
+    jobs:
+      build:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/client-python.git
+          cd client-python
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel build --config=rbe //...
+      test-concept:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/client-python.git
+          cd client-python
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel test //:test_concept --test_output=errors
+      test-grakn:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/client-python.git
+          cd client-python
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel test //:test_grakn --test_output=errors
+      test-keyspace:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/client-python.git
+          cd client-python
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel test //:test_keyspace --test_output=errors
+      test-answer:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/client-python.git
+          cd client-python
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel test //:test_answer --test_output=errors
+
+    execution:
+      - build
+      - test-concept
+      - test-grakn
+      - test-keyspace
+      - test-answer
+
+
+release:
+  validation:
+    job:
+      validate-dependencies:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow validation: validate-dependencies"
+  deployment:
+    job:
+      deploy-workbase:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow deployment: deploy-workbase"
+  broadcast:
+    job:
+      broadcast-version:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow bump: bump-version"
+
