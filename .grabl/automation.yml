@@ -14,7 +14,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/client-python.git
           cd client-python
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel build --config=rbe //...
       test-concept:
@@ -23,7 +23,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/client-python.git
           cd client-python
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test //:test_concept --test_output=errors
       test-grakn:
@@ -32,7 +32,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/client-python.git
           cd client-python
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test //:test_grakn --test_output=errors
       test-keyspace:
@@ -41,7 +41,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/client-python.git
           cd client-python
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test //:test_keyspace --test_output=errors
       test-answer:
@@ -50,7 +50,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/client-python.git
           cd client-python
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test //:test_answer --test_output=errors
 
