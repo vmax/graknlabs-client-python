@@ -5,6 +5,7 @@ build:
         machine: grabl-ubuntu-2004
         type: foreground
         script: |
+          ls -la
           echo "workflow quality: dependency-analysis"
   correctness:
     jobs:
