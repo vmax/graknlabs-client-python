@@ -5,6 +5,7 @@ build:
         machine: grabl-ubuntu-2004
         type: foreground
         script: |
+          pwd
           ls -la
           echo "workflow quality: dependency-analysis"
   correctness:
